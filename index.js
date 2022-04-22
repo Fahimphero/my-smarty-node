@@ -1,62 +1,67 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello from my personal Smarty Smarty Node with auto restart')
-})
+    res.send('Hello from my personal Smarty Pant!! with auto restart')
+});
 
 const users = [
-    { id: 1, name: 'Ema Watson', email: 'emawatson@gmail.com', phone: '032634624' },
-    { id: 2, name: 'Cody Rhodes', email: 'codyrhodes@gmail.com', phone: '032634624' },
-    { id: 3, name: 'Harley Quinn', email: 'harleyquinn@gmail.com', phone: '032634624' },
-    { id: 4, name: 'John Cena', email: 'johncena@gmail.com', phone: '032634624' },
-    { id: 5, name: 'The Rock', email: 'therock@gmail.com', phone: '032634624' },
-    { id: 6, name: 'Roman Reigns', email: 'romanreigns@gmail.com', phone: '032634624' },
-    { id: 7, name: 'The Undertaker', email: 'theundertaker@gmail.com', phone: '032634624' },
+    { id: 1, name: 'Sabana', email: 'sabana@gmail.com', phone: '0178888888' },
+    { id: 2, name: 'Shabnoor', email: 'Shabnoor@gmail.com', phone: '0178888888' },
+    { id: 3, name: 'Suchorita', email: 'Suchorita@gmail.com', phone: '0178888888' },
+    { id: 4, name: 'suchonda', email: 'suchonda@gmail.com', phone: '0178888888' },
+    { id: 5, name: 'srabonti', email: 'srabonti@gmail.com', phone: '0178888888' },
+    { id: 6, name: 'sabila', email: 'sabila@gmail.com', phone: '0178888888' },
+    { id: 7, name: 'sohana', email: 'sohana@gmail.com', phone: '0178888888' },
 ]
 
+// app.get('/users', (req, res) =>{
+//     res.send(users);
+// })
+
+
+// filter by search query parameter
 app.get('/users', (req, res) => {
-    // filter by search query parameter
     if (req.query.name) {
         const search = req.query.name.toLowerCase();
-        const matched = users.filter(user => user.name.toLowerCase().includes(search));
+        const matched = users.filter(user => user.name.toLowerCase().includes(search))
         res.send(matched);
     }
     else {
         res.send(users);
     }
-
-})
+});
 
 app.get('/user/:id', (req, res) => {
     console.log(req.params);
     const id = parseInt(req.params.id);
     const user = users.find(u => u.id === id);
-    res.send(user)
-})
+    res.send(user);
+});
+
 
 app.post('/user', (req, res) => {
     console.log('request', req.body);
     const user = req.body;
     user.id = users.length + 1;
-    users.push(user)
-    res.send(user)
-})
+    users.push(user);
+    res.send(user);
+});
 
 app.get('/fruits', (req, res) => {
-    res.send(['mango', 'apple', 'oranges'])
-})
+    res.send(['mango', 'apple', 'oranges']);
+});
 
-app.get('/fruits/mango/fazlee', (req, res) => {
-    res.send('sour sour fazlee flavour')
-})
+app.get('/fruits/mango/fazle', (req, res) => {
+    res.send('sour sour fazle flavor');
+});
 
 
 app.listen(port, () => {
-    console.log('Listening to port', port);
+    console.log('Listening to port', port)
 })
